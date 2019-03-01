@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="@localhost" uuid="12ae11ae-4add-4a97-8096-acad6b225e89">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://localhost:3306</jdbc-url>
+      <driver-properties>
+        <property name="autoReconnect" value="true" />
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="postgress" uuid="0e425e25-a4fd-488e-92f6-47c774e3faed">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-75-230-41.eu-west-1.compute.amazonaws.com:5432/dedhiba4ej2uif?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory</jdbc-url>
+      <driver-properties>
+        <property name="ssl" value="true" />
+        <property name="sslmode" value="require" />
+        <property name="sslfactory" value="org.postgresql.ssl.nonvalidatingfactory" />
+      </driver-properties>
+    </data-source>
+  </component>
+</project>
