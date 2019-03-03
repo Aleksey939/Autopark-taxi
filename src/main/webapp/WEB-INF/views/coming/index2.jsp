@@ -11,12 +11,17 @@
         <h2>Приходы</h2>
         <form method="post">
             <label>
-                <%--<c:set var = "person" scope = "session" value = "${person}"/>--%>
-               <%--<c:if test = "${person!=null}" >--%>
-                  <%--${person.id} , ${person.lastname} </p>--%>
-               <%--</c:if>--%>
-                Инвестор: <select id="choice" onchange=func(); size="1" name="personId">
-                <option value="0">Все</option>
+
+                Инвестор: <select id="choice"  size="1" name="personId">
+                <c:set var = "personPost" scope = "session" value = "${personPost}"/>
+                <c:if test = "${personPost!=null}" >
+                    <option value="${personPost.id}">${personPost.lastName}</option>
+
+                </c:if>
+
+
+                    <option value="0">Все</option>
+
            <c:forEach var="person" items="${persons}">
                     <option value="${person.id}"> ${person.lastName}</option>
                 </c:forEach>
@@ -25,9 +30,16 @@
 
 
             <label>
-                 ${car.number}
-                Автомобиль: <select id="choice" onchange=func(); size="1" name="carId">
-                <option value="0">Все</option>
+
+                Автомобиль: <select id="choice" ; size="1" name="carId">
+                <c:set var = "car" scope = "session" value = "${carPost}"/>
+                <c:if test = "${carPost!=null}" >
+                    <option value="${carPost.id}">${carPost.number}</option>
+                </c:if>
+
+
+                    <option value="0">Все</option>
+
 
                    <c:forEach var="car" items="${cars}">
                     <option value="${car.id}"> ${car.number}</option>
@@ -227,14 +239,12 @@
 
                     <c:forEach items="${comings}" var="coming">
                         <td>
+                            <c:set var="checked" value ="unchecked"></c:set>
                             <c:if test="${coming.payment}">
                                 <c:set var="checked" value ="checked"></c:set>
                             </c:if>
-
-                        <input ${checked} type="checkbox" id="${coming.id}" name="done" >
-
-
-            </td>
+                        <input type="checkbox" ${checked} disabled>
+                        </td>
                     </c:forEach>
 
 
@@ -242,9 +252,11 @@
             <tr>
                 <td></td>
                 <c:forEach items="${comings}" var="coming">
-                    <th><a href="payment/addpaymentforComing/${coming.id}">Оплатить</a>
+                    <th><a href="payment/addpaymentforComing/${coming.id}">Оплатить</a> </br>
+                        <a href="payment/delete/${coming.id}">Удалить оплату</a>
                         </br>  <a href="/coming/edit/${coming.id}">Редактировать</a>
                         </br><a href="/coming/delete/${coming.id}">Удалить</a></th>
+
                 </c:forEach>
             </tr>
         </table>
@@ -362,7 +374,7 @@
 
         }
 
-        window.ready(f());
+        $(document).ready(f());
     </script>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>

@@ -14,6 +14,7 @@
     <%@include file="/WEB-INF/views/includes/header.jsp" %>
 
         <section>
+            <h3>Добавление Персоны</h3>
             <div class="row">
                 <div class="col-md-4 col-lg-4 content-container">
                     <div class="field">
@@ -51,6 +52,7 @@
                             </label> <br/>
                             <label>
                                 Статус: <select size="1" name="status">
+                                <option value=""> </option>
                                 <c:forEach var="personStatusValue"
                                            items="<%=org.ivanov.Domain.entity.status.values() %>">
                                     <option> ${personStatusValue}</option>

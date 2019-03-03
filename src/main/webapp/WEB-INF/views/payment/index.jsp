@@ -44,12 +44,13 @@
 
                         <tr>
                             <th scope="row"></th>
-                            <td>${payment.startDate}</td>
+                            <td>${payment.startDate} - ${payment.coming.startDate.plusDays(7)} </td>
                             <td>${payment.sum}</td>
                             <td>${payment.person.lastName}</td>
                             <td>${payment.person.card}</td>
                             <td>${payment.time}</td>
-                            <th><a href="/payment/edit/${payment.id}">Редактировать</a>
+                            <th>
+                                <%--<a href="/payment/edit/${payment.id}">Редактировать</a>--%>
                                 <a href="/payment/delete/${payment.id}">Удалить</a></th>
                         </tr>
                     </c:forEach>

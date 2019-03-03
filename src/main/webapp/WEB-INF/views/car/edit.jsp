@@ -26,27 +26,27 @@
                         </label>
                         <br/>
                         <label>
-                            number: <input value="${car.number}" name="number"/>
+                            Гос Номер: <input value="${car.number}" name="number"/>
                         </label>
                         <br/>
                         <label>
-                            mileage: <input value="${car.mileage}" input="number" name="mileage"/>
+                            Пробег: <input value="${car.mileage}" input="number" name="mileage"/>
                         </label>
                         <br/>
                         <label>
-                            year: <input value="${car.year}" input="number" name="year"/>
+                            Год выпуска: <input value="${car.year}" input="number" name="year"/>
                         </label>
                         <br/>
                         <label>
-                            priceStart: <input value="${car.priceStart}" input="number" name="priceStart"/>
+                            Стартовая цена: <input value="${car.priceStart}" input="number" name="priceStart"/>
                         </label>
                         <br/>
                         <label>
-                            priceEnd: <input value="${car.priceEnd}" input="number" name="priceEnd"/>
+                            Конечная цена: <input value="${car.priceEnd}" input="number" name="priceEnd"/>
                         </label>
                         <br/>
                         <label>
-                            investor: <select size="1"  name="personId">
+                            Инвестор: <select size="1"  name="personId">
                             <option value=""> </option>
                             <c:forEach var="person" items="${persons}">
                                 <option value="${person.id}"> ${person.lastName}</option>
@@ -54,7 +54,7 @@
                         </select>
                         </label>
                         <label>
-                            car: <select size="1" name="brandId">
+                            Автомобиль: <select size="1" name="brandId">
                             <option value=""> </option>
                             <c:forEach var="brand" items="${brands}">
                                 <option value="${brand.id}"> ${brand.model}</option>

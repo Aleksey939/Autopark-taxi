@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class Coming {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -42,9 +43,11 @@ public class Coming {
     private double   investorIncome;
     private double   depreciation;
     private double   netinvestorIncome;
-    private boolean payment=false;
+    private boolean  payment=false;
+
     @Column(columnDefinition = "timestamp")
     private LocalDateTime time;
     @ManyToOne(optional = false)
     private Car car;
+
 }

@@ -36,7 +36,7 @@
                         </label>
                         <br/>
                         <label>
-                            Стартовая цна: <input input="number" name="priceStart"/>
+                            Стартовая цена: <input input="number" name="priceStart"/>
                         </label>
                         <br/>
                         <label>
@@ -45,6 +45,7 @@
                         <br/>
                         <label>
                             Инвестор: <select size="1" name="personId">
+                            <option value="">Выбирите</option>
                             <c:forEach var="person" items="${persons}">
                                 <option value="${person.id}"> ${person.lastName}</option>
                             </c:forEach>
@@ -54,6 +55,7 @@
                         <br/>
                         <label>
                             Автомобиль: <select size="1" name="brandId">
+                            <option value="">Выбирите</option>
                             <c:forEach var="brand" items="${brands}">
                                 <option value="${brand.id}"> ${brand.model}</option>
                             </c:forEach>

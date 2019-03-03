@@ -29,15 +29,17 @@
 
 
                 <tr>
-                    <th scope="row">${car.id}</th>
+                    <th scope="row"></th>
                     <td>${brand.brand}</td>
                     <td>${brand.model}</td>
                     <td>${brand.engineСapacity}</td>
                     <td>${brand.transmission}</td>
 
 
-                    <th><a href="/car/edit/${car.id}">Редактировать</a>
-                        <a href="/car/delete/${car.id}">Удалить</a></th>
+                    <th>
+                        <a href="/brand/edit/${brand.id}">Редактировать</a>
+                        <%--<a href="/car/delete/${car.id}">Удалить</a>--%>
+                    </th>
                 </tr>
             </c:forEach>
             </tbody>

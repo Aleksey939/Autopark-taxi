@@ -57,7 +57,7 @@ public class CarController {
             Person person = personRepository.findById(personId).get();
             car.setPerson(person);
             Brand brand = brandRepository.findById(brandId).get();
-            //Request processing failed; nested exception is java.util.NoSuchElementException: No value present
+
             car.setBrand(brand);
             carRepository.save(car);
         }

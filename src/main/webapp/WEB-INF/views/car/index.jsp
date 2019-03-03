@@ -26,10 +26,10 @@
                 </thead>
                 <tbody>
 
-                <% int i = 0;%>
+
 
                 <c:forEach items="${cars}" var="car">
-                    <% i++;%>
+
 
                     <tr>
                         <th scope="row"></th>
@@ -41,7 +41,7 @@
                         <td>${car.person.lastName}</td>
                         <td>${car.brand.brand}</td>
                         <th><a href="/car/edit/${car.id}">Редактировать</a>
-                            <a href="/car/delete/${car.id}">Удалить</a></th>
+                            <%--<a href="/car/delete/${car.id}">Удалить</a></th>--%>
                     </tr>
                 </c:forEach>
                 </tbody>

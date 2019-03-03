@@ -21,12 +21,14 @@ public class BrandController {
         model.addAttribute("brands", brandRepository.findAll());
         return "brand/index";
     }
+
     @GetMapping("/add")
     public String addCar(Model model) {
         model.addAttribute("brands", brandRepository.findAll());
 
         return "brand/add";
     }
+
     @PostMapping("/add")
     public String addCar(@ModelAttribute Brand brand, BindingResult result,
 
@@ -42,6 +44,21 @@ public class BrandController {
 
             brandRepository.save(brand);
         }
+        return "redirect:/brand";
+    }
+
+    @GetMapping("/edit/{brandId}")
+    public String editBrand(@PathVariable Integer brandId, Model model) {
+        model.addAttribute("brand", brandRepository.findById(brandId));
+
+        return "brand/edit";
+    }
+
+    @PostMapping("/edit/{brandId}")
+    public String editBrand(Model model, @ModelAttribute Brand brand, @PathVariable Integer brandId) {
+
+        brandRepository.save(brand);
+
         return "redirect:/brand";
     }
 }

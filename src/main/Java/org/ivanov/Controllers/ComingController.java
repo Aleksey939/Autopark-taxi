@@ -4,13 +4,17 @@ import lombok.var;
 import org.ivanov.Domain.entity.Car;
 import org.ivanov.Domain.entity.Coming;
 
+import org.ivanov.Domain.entity.Payment;
 import org.ivanov.Domain.entity.Person;
 import org.ivanov.Domain.repositories.CarRepository;
 import org.ivanov.Domain.repositories.ComingRepository;
+import org.ivanov.Domain.repositories.PaymentRepository;
 import org.ivanov.Domain.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,12 +26,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 @Controller
 @RequestMapping("/coming")
 public class ComingController {
-
-    List<Coming> comingsPost=null;
 
 
     @Autowired
@@ -37,83 +39,92 @@ public class ComingController {
     CarRepository carRepository;
     @Autowired
     PersonRepository personRepository;
+    @Autowired
+    PaymentRepository paymentRepository;
 
     @GetMapping
-    public String index(Model model) {
-        if(comingsPost!=null)
-        Collections.sort(comingsPost,(a,b)-> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate())  ? 0 : 1);
-        model.addAttribute("comings", comingsPost);
+    public String index(Model model, RedirectAttributes attr) {
+//        List<Coming> comingsPost = null;
+//        if (comingsPost != null)
+//            Collections.sort(comingsPost, (a, b) -> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate()) ? 0 : 1);
+//        model.addAttribute("comings", comingsPost);
+
         model.addAttribute("persons", personRepository.findAll());
         model.addAttribute("cars", carRepository.findAll());
-//        if (personPost!=0) {model.addAttribute("person", personRepository.findById(personPost));}
-//        else model.addAttribute("person",null);
-//        if (carPost!=0) model.addAttribute("car", carRepository.findById(carPost)); else model.addAttribute("car",null);
+
+
         return "coming/index2";
     }
 
     @PostMapping()
     public String index(Model model, @RequestParam Integer personId, @RequestParam Integer carId,
-                        @RequestParam String date1, @RequestParam  String date2, RedirectAttributes attr) {
-
-        LocalDate datestart =  LocalDate.parse(date1);
-        LocalDate dateend =  LocalDate.parse(date2);
+                        @RequestParam String date1, @RequestParam String date2, RedirectAttributes attr) {
+        List<Coming> comingsPost;
+        LocalDate datestart = LocalDate.parse(date1);
+        LocalDate dateend = LocalDate.parse(date2);
 
         List<Coming> comings = comingRepository.findAll();
         comingsPost = new ArrayList<>();
 
-        if (personId == 0 && carId == 0 ) {
+        if (personId == 0 && carId == 0) {
 //            comingsPost = comingRepository.findAll();
             for (Coming coming : comings) {
                 if (coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend))
                     comingsPost.add(coming);
             }
-            model.addAttribute("comings", comingsPost);
+            attr.addFlashAttribute("comings", comingsPost);
+//            model.addAttribute("comings", comingsPost);
             return "redirect:/coming";
-
 
 
         } else if (personId != 0 && carId == 0) {
             for (Coming coming : comings) {
-                if (coming.getCar().getPerson().getId() == personId &&coming.getStartDate().isAfter(datestart)&&coming.getStartDate().isBefore(dateend)) {
+                if (coming.getCar().getPerson().getId() == personId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
                     comingsPost.add(coming);
+
                 }
             }
         } else if (personId == 0 && carId != 0) {
             for (Coming coming : comings) {
-                if (coming.getCar().getId() == carId &&coming.getStartDate().isAfter(datestart)&&coming.getStartDate().isBefore(dateend)) {
+                if (coming.getCar().getId() == carId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
                     comingsPost.add(coming);
                 }
             }
         } else {
             for (Coming coming : comings) {
-                if (coming.getCar().getPerson().getId() == personId && coming.getCar().getId() == carId&&coming.getStartDate().isAfter(datestart)&&coming.getStartDate().isBefore(dateend)) {
+                if (coming.getCar().getPerson().getId() == personId && coming.getCar().getId() == carId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
                     comingsPost.add(coming);
                 }
             }
 
         }
         //model.addAttribute("cars", carRepository.findAll());
-        Collections.sort(comingsPost,(a,b)-> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate())  ? 0 : 1);
-        model.addAttribute("comings", comingsPost);
+        Collections.sort(comingsPost, (a, b) -> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate()) ? 0 : 1);
+//        model.addAttribute("comings", comingsPost);
+        attr.addFlashAttribute("comings", comingsPost);
 
+        if (carId != 0) {
+            Car carPost = carRepository.findById(carId).get();
+            attr.addFlashAttribute("carPost", carPost);
+        }
 
-if (carId!=0){ Car carPost=carRepository.findById(carId).get();
-    attr.addFlashAttribute("car",carPost);}
-    if(personId!=0) {
-        Person personPost = personRepository.findById(personId).get();
-        attr.addFlashAttribute("person", personPost);
-    }
+//        else  attr.addFlashAttribute("carPost", null);
+        if (personId != 0) {
+            Person personPost = personRepository.findById(personId).get();
+            attr.addFlashAttribute("personPost", personPost);
+        }
+//        else attr.addFlashAttribute("personPost", null);
+
         return "redirect:/coming";
     }
 
-
-
+    @Secured("ROLE_Admin")
     @GetMapping("/add")
     public String addComing(Model model) {
         model.addAttribute("cars", carRepository.findAll());
         return "coming/add";
     }
-
+    @Secured("ROLE_Admin")
     @PostMapping("/add")
     public String addComing(@ModelAttribute Coming coming, BindingResult result, @RequestParam Integer carId,
                             RedirectAttributes redirectAttributes) {
@@ -125,9 +136,8 @@ if (carId!=0){ Car carPost=carRepository.findById(carId).get();
         } else {
 
 
-
-             coming.setStartDate(LocalDate.parse(coming.getStartDateDto(),
-                  DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            coming.setStartDate(LocalDate.parse(coming.getStartDateDto(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 
             redirectAttributes.addFlashAttribute("coming", "Added successfully");
@@ -135,27 +145,23 @@ if (carId!=0){ Car carPost=carRepository.findById(carId).get();
             coming.setCar(car);
 
 
-
-
             coming.setFundMaintenance(Round2(coming.getMileage() * 0.13));
             coming.setFundRepairs(Round2(coming.getMileage() * 0.35));
-            coming.setCommissionPartner(Round2(coming.getIncome() * 0.07+coming.getBonus()*0.07));
+            coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
             coming.setDriverSalary(Round2(coming.getIncome() * 0.35));
             coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
             coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
             var allCommingsbyCar = comingRepository.findAllByCar(car);
 
-            if(allCommingsbyCar.size()==0) {
+            if (allCommingsbyCar.size() == 0) {
                 coming.setCapitalizationMaintenanceStart(0);
                 coming.setCapitalizationRepairsStart(0);
-            }
-            else {
+            } else {
                 coming.setCapitalizationMaintenanceStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationMaintenanceEnd());
                 coming.setCapitalizationRepairsStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationRepairsEnd());
             }
-            coming.setCapitalizationMaintenanceEnd(Round2 (coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
+            coming.setCapitalizationMaintenanceEnd(Round2(coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
             coming.setCapitalizationRepairsEnd(Round2(coming.getCapitalizationRepairsStart() + coming.getFundRepairs() - coming.getCostsOfRepairs()));
-
 
 
             coming.setProfit(Round2(coming.getIncome()
@@ -170,30 +176,38 @@ if (carId!=0){ Car carPost=carRepository.findById(carId).get();
 
             coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
             coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-            coming.setDepreciation((coming.getCar().getPriceStart()*28-coming.getCar().getPriceEnd()*28)/104);
-            coming.setNetinvestorIncome(Round2(coming.getInvestorIncome()-coming.getDepreciation()));
+            coming.setDepreciation((coming.getCar().getPriceStart() * 28 - coming.getCar().getPriceEnd() * 28) / 104);
+            coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
 
 
             comingRepository.save(coming);
         }
         return "redirect:/coming";
     }
-
+    @Secured("ROLE_Admin")
     @GetMapping("/delete/{comingId}")
     public String delete(@PathVariable Integer comingId) {
+        Coming coming = comingRepository.findById(comingId).get();
+
+//        if (coming.getPayment() != null) {
+//            int paymentfordel = coming.getPayment().getId();
+//            paymentRepository.deleteById(paymentfordel);
+//
+//        }
         comingRepository.deleteById(comingId);
 
         return "redirect:/coming";
     }
 
+    @Secured("ROLE_Admin")
     @GetMapping("/edit/{comingId}")
-    public String edit(Model model, @PathVariable Integer comingId ) {
+    public String edit(Model model, @PathVariable Integer comingId) {
         model.addAttribute("coming", comingRepository.findById(comingId).get());
         model.addAttribute("cars", carRepository.findAll());
 
         return "coming/edit";
     }
-
+    @Secured("ROLE_Admin")
     @PostMapping("/edit/{comingId}")
     public String edit(Model model, @ModelAttribute Coming coming, @PathVariable Integer comingId, @RequestParam Integer carId) {
 
@@ -206,12 +220,12 @@ if (carId!=0){ Car carPost=carRepository.findById(carId).get();
 
         coming.setFundMaintenance(Round2(coming.getMileage() * 0.13));
         coming.setFundRepairs(Round2(coming.getMileage() * 0.35));
-        coming.setCommissionPartner(Round2(coming.getIncome() * 0.07+coming.getBonus()*0.07));
+        coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
         coming.setDriverSalary(Round2(coming.getIncome() * 0.35));
         coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
         coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
         //coming.setCapitalizationMaintenanceStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationMaintenanceEnd());
-        coming.setCapitalizationMaintenanceEnd (Round2(coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
+        coming.setCapitalizationMaintenanceEnd(Round2(coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
         //coming.setCapitalizationRepairsStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationRepairsEnd());
         coming.setCapitalizationRepairsEnd(Round2(coming.getCapitalizationRepairsStart() + coming.getFundRepairs() - coming.getCostsOfRepairs()));
 
@@ -228,8 +242,8 @@ if (carId!=0){ Car carPost=carRepository.findById(carId).get();
 
         coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
         coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-        coming.setDepreciation((coming.getCar().getPriceStart()*28-coming.getCar().getPriceEnd()*28)/104);
-        coming.setNetinvestorIncome(Round2(coming.getInvestorIncome()-coming.getDepreciation()));
+        coming.setDepreciation((coming.getCar().getPriceStart() * 28 - coming.getCar().getPriceEnd() * 28) / 104);
+        coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
         comingRepository.save(coming);
         return "redirect:/coming";
     }

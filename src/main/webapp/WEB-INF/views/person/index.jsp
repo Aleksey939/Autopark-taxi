@@ -40,7 +40,7 @@
                         <td>${person.card}</td>
                         <td>${person.status}</td>
                         <th><a href="/person/edit/${person.id}">Редактировать</a>
-                            <a href="/person/delete/${person.id}">Удалить</a></th>
+                            <%--<a href="/person/delete/${person.id}">Удалить</a></th>--%>
                     </tr>
                 </c:forEach>
                 </tbody>

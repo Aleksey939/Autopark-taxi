@@ -32,7 +32,7 @@
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:2.6.0" />
           <element id="library" level="project" name="Maven: com.enigmabridge:hibernate4-sqlite-dialect:0.1.2" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.1.4.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:5.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:5.1.4.RELEASE" />

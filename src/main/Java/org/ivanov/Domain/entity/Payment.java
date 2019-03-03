@@ -22,11 +22,13 @@ public class Payment {
     private String startDate;
 //    @Transient
 //    private String startDateDto;
-    private BigDecimal sum;
+    private double sum;
     @Column(columnDefinition = "timestamp")
     private LocalDateTime time;
     @ManyToOne(optional = false)
     private Person person;
+//    @OneToOne(optional = false)
+//    private Coming coming;
 
 
 

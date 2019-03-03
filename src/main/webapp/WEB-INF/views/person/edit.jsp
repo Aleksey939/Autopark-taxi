@@ -14,6 +14,7 @@
     <%@include file="/WEB-INF/views/includes/header.jsp" %>
 
         <section>
+            <h3>Редактирование Персоны</h3>
             <div class="row">
                 <div class="col-md-4 col-lg-4 content-container">
                     <div class="field">

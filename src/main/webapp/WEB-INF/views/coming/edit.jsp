@@ -15,7 +15,7 @@
 <%@include file="/WEB-INF/views/includes/header.jsp" %>
 
     <section>
-        <h3>Добавление Прихода</h3>
+        <h3>Редактирование Прихода</h3>
         <div class="row">
             <div class="col-md-6 col-lg-6 content-container">
                 <div class="field">

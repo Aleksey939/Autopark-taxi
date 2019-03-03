@@ -75,9 +75,23 @@ public class WorkDoneController {
         }
         return "redirect:/workdone";
     }
-    @GetMapping("/delete/{workDoneId}")
-    public String delete(@PathVariable Integer workDoneId) {
-        workDoneRepository.deleteById(workDoneId);
+    @GetMapping("/delete/{workdoneId}")
+    public String delete(@PathVariable Integer workdoneId) {
+        workDoneRepository.deleteById(workdoneId);
+        return "redirect:/workdone";
+    }
+    @GetMapping("/edit/{workdoneId}")
+    public String edit(@PathVariable Integer workdoneId, Model model) {
+        model.addAttribute("workDone", workDoneRepository.findById(workdoneId));
+        model.addAttribute("cars", carRepository.findAll());
+
+        return "workdone/edit";
+    }
+    @PostMapping("/edit/{workdoneId}")
+    public String edit(Model model, @ModelAttribute WorkDone workDone, @PathVariable Integer workdoneId) {
+
+        workDoneRepository.save(workDone);
+
         return "redirect:/workdone";
     }
 }
