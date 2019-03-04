@@ -48,8 +48,13 @@ public class ComingController {
 //        if (comingsPost != null)
 //            Collections.sort(comingsPost, (a, b) -> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate()) ? 0 : 1);
 //        model.addAttribute("comings", comingsPost);
-
-        model.addAttribute("persons", personRepository.findAll());
+        List<Person> persons = personRepository.findAll();
+        List<Person> personinvestor=new ArrayList<>();
+        for (Person person:persons) {
+            if (person.getStatus().equals("ROLE_Investor"))
+            personinvestor.add(person);
+        }
+        model.addAttribute("persons",personinvestor );
         model.addAttribute("cars", carRepository.findAll());
 
 
@@ -70,7 +75,7 @@ public class ComingController {
 //            comingsPost = comingRepository.findAll();
             for (Coming coming : comings) {
                 if (coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend))
-                    comingsPost.add(coming);
+                                        comingsPost.add(coming);
             }
             attr.addFlashAttribute("comings", comingsPost);
 //            model.addAttribute("comings", comingsPost);
@@ -80,6 +85,8 @@ public class ComingController {
         } else if (personId != 0 && carId == 0) {
             for (Coming coming : comings) {
                 if (coming.getCar().getPerson().getId() == personId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
+
+
                     comingsPost.add(coming);
 
                 }
@@ -87,12 +94,16 @@ public class ComingController {
         } else if (personId == 0 && carId != 0) {
             for (Coming coming : comings) {
                 if (coming.getCar().getId() == carId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
+
+
                     comingsPost.add(coming);
                 }
             }
         } else {
             for (Coming coming : comings) {
                 if (coming.getCar().getPerson().getId() == personId && coming.getCar().getId() == carId && coming.getStartDate().isAfter(datestart) && coming.getStartDate().isBefore(dateend)) {
+
+
                     comingsPost.add(coming);
                 }
             }
@@ -102,6 +113,7 @@ public class ComingController {
         Collections.sort(comingsPost, (a, b) -> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate()) ? 0 : 1);
 
         attr.addFlashAttribute("comings", comingsPost);
+
 
         if (carId != 0) {
             Car carPost = carRepository.findById(carId).get();
