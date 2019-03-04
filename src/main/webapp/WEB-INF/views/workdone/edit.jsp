@@ -23,8 +23,10 @@
         <div class="col-md-4 col-lg-4 content-container">
             <div class="field">
                 <form id="work" method="post">
+
                     <label>
-                        Выбор автомобиля: <select size="1" name="carId">
+                        Выбор автомобиля:
+                        <select size="1" name="carId">
                         <option value=""> </option>
                         <c:forEach var="car" items="${cars}">
                             <option value="${car.id}"> ${car.number}</option>
@@ -35,6 +37,11 @@
                     <label>Дата: <input type="date" name="Date"/>
                     </label>
                     <br/>
+
+
+                    <label>
+                        <input type="hidden" value="${workDone.get().id}" name="id"/>
+                    </label>
                     <label>
                         Пробег: <input value="${workDone.get().mileage}" input="number" name="mileage"/>
                     </label>

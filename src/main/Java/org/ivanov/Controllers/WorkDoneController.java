@@ -88,8 +88,10 @@ public class WorkDoneController {
         return "workdone/edit";
     }
     @PostMapping("/edit/{workdoneId}")
-    public String edit(Model model, @ModelAttribute WorkDone workDone, @PathVariable Integer workdoneId) {
+    public String edit(Model model, @ModelAttribute WorkDone workDone, @PathVariable Integer workdoneId, @RequestParam Integer carId ) {
 
+        Car car = carRepository.findById(carId).get();
+        workDone.setCar(car);
         workDoneRepository.save(workDone);
 
         return "redirect:/workdone";
