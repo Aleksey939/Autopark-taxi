@@ -98,9 +98,9 @@ public class ComingController {
             }
 
         }
-        //model.addAttribute("cars", carRepository.findAll());
+
         Collections.sort(comingsPost, (a, b) -> a.getStartDate().isAfter(b.getStartDate()) ? -1 : a.getStartDate().isAfter(b.getStartDate()) ? 0 : 1);
-//        model.addAttribute("comings", comingsPost);
+
         attr.addFlashAttribute("comings", comingsPost);
 
         if (carId != 0) {
@@ -108,12 +108,11 @@ public class ComingController {
             attr.addFlashAttribute("carPost", carPost);
         }
 
-//        else  attr.addFlashAttribute("carPost", null);
+
         if (personId != 0) {
             Person personPost = personRepository.findById(personId).get();
             attr.addFlashAttribute("personPost", personPost);
         }
-//        else attr.addFlashAttribute("personPost", null);
 
         return "redirect:/coming";
     }
@@ -187,13 +186,7 @@ public class ComingController {
     @Secured("ROLE_Admin")
     @GetMapping("/delete/{comingId}")
     public String delete(@PathVariable Integer comingId) {
-        Coming coming = comingRepository.findById(comingId).get();
 
-//        if (coming.getPayment() != null) {
-//            int paymentfordel = coming.getPayment().getId();
-//            paymentRepository.deleteById(paymentfordel);
-//
-//        }
         comingRepository.deleteById(comingId);
 
         return "redirect:/coming";

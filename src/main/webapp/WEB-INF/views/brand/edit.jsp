@@ -24,6 +24,9 @@
             <div class="field">
                 <form method="post">
                     <label>
+                        <input type="hidden" value="${brand.get().id}" name="id"/>
+                    </label>
+                    <label>
                         Марка : <input value="${brand.get().brand}"name="brand"/>
                     </label>
                     <br/>
