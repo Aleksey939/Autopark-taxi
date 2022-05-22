@@ -26,5 +26,11 @@
         <property name="sslfactory" value="org.postgresql.ssl.nonvalidatingfactory" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="d859hrvn7nn9t4@ec2-52-18-185-208.eu-west-1.compute.amazonaws.com" uuid="6ef271be-335b-4f7c-967c-7106f1b6c27c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-52-18-185-208.eu-west-1.compute.amazonaws.com:5432/d859hrvn7nn9t4?sslmode=require</jdbc-url>
+    </data-source>
   </component>
 </project>
