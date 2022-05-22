@@ -62,7 +62,7 @@
                                 Статус: <select size="1" name="status">
                                 <option value=""> </option>
                                 <c:forEach var="personStatusValue"
-                                           items="<%=org.ivanov.Domain.entity.status.values() %>">
+                                           items="<%=org.ivanov.domain.entity.status.values() %>">
                                     <option> ${personStatusValue}</option>
                                 </c:forEach>
                             </select>
