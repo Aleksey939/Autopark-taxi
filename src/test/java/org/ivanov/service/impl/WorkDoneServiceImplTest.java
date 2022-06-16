@@ -61,6 +61,11 @@ public class WorkDoneServiceImplTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void findAllByCarIdTest_whenNullId_thenThrowNullPointerException() {
+        workDoneService.findAllByCarId(null);
+    }
+
     @Test
     public void findByIdTest() {
         //given:
@@ -75,6 +80,11 @@ public class WorkDoneServiceImplTest {
 
         //then:
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void findByIdTest_whenNullId_thenThrowNullPointerException() {
+        workDoneService.findById(null);
     }
 
     @Test
@@ -102,6 +112,11 @@ public class WorkDoneServiceImplTest {
 
         //then:
         verify(workDoneRepository, times(1)).deleteById(workDoneId);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void deleteTest_whenNullId_thenThrowNullPointerException() {
+        workDoneService.deleteById(null);
     }
 
     private WorkDone createWorkDone(int id) {
