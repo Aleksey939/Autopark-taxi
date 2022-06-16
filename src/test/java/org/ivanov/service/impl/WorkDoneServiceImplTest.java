@@ -43,6 +43,23 @@ public class WorkDoneServiceImplTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    public void findAllByCarIdTest() {
+        //given:
+        int carId = 1;
+
+        final List<WorkDone> expectedResult = Arrays.asList(createWorkDone(1));
+
+        //mocks:
+        Mockito.when(workDoneRepository.findAllByCarId(carId)).thenReturn(expectedResult);
+
+        //when:
+        final List<WorkDone> actualResult = workDoneService.findAllByCarId(carId);
+
+        //then:
+        assertEquals(expectedResult, actualResult);
+    }
+
     private WorkDone createWorkDone(int id) {
         WorkDone workDone = new WorkDone();
         workDone.setId(id);
