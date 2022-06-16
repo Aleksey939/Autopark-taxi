@@ -1,14 +1,14 @@
 package org.ivanov.controllers;
 
 import lombok.var;
-import org.ivanov.domain.entity.Car;
-import org.ivanov.domain.entity.Coming;
+import org.ivanov.domains.entities.Car;
+import org.ivanov.domains.entities.Coming;
 
-import org.ivanov.domain.entity.Person;
-import org.ivanov.domain.repositories.CarRepository;
-import org.ivanov.domain.repositories.ComingRepository;
-import org.ivanov.domain.repositories.PaymentRepository;
-import org.ivanov.domain.repositories.PersonRepository;
+import org.ivanov.domains.entities.Person;
+import org.ivanov.domains.repositories.CarRepository;
+import org.ivanov.domains.repositories.ComingRepository;
+import org.ivanov.domains.repositories.PaymentRepository;
+import org.ivanov.domains.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

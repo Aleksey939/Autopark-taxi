@@ -1,6 +1,6 @@
-package org.ivanov.domain.repositories;
+package org.ivanov.domains.repositories;
 
-import org.ivanov.domain.entity.WorkDone;
+import org.ivanov.domains.entities.WorkDone;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WorkDoneRepository  extends JpaRepository<WorkDone, Integer> {

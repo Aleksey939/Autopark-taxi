@@ -1,6 +1,6 @@
-package org.ivanov.domain.repositories;
+package org.ivanov.domains.repositories;
 
-import org.ivanov.domain.entity.Brand;
+import org.ivanov.domains.entities.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BrandRepository extends JpaRepository<Brand, Integer> {

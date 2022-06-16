@@ -11,17 +11,17 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
 
     <http use-expressions="false">
-        <!--<intercept-url pattern="/setting*" access="ROLE_Admin"/>-->
-        <intercept-url pattern="/payment/**" access="ROLE_Admin"/>
-        <intercept-url pattern="/brand/**" access="ROLE_Admin"/>
-        <intercept-url pattern="/person/**" access="ROLE_Admin"/>
-        <intercept-url pattern="/car/**" access="ROLE_Admin"/>
-        <!--<intercept-url pattern="/coming/**" access="ROLE_Admin"/>-->
-        <!--<intercept-url pattern="/workdone/**" access="ROLE_Admin"/>-->
-        <intercept-url pattern="/coming" access="ROLE_Admin, ROLE_Investor"/>
-        <intercept-url pattern="/workdone" access="ROLE_Admin, ROLE_Investor"/>
+        <!--<intercept-url pattern="/setting*" access="ROLE_ADMIN"/>-->
+        <intercept-url pattern="/payment/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/brand/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/person/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/car/**" access="ROLE_ADMIN"/>
+        <!--<intercept-url pattern="/coming/**" access="ROLE_ADMIN"/>-->
+        <!--<intercept-url pattern="/workdone/**" access="ROLE_ADMIN"/>-->
+        <intercept-url pattern="/coming" access="ROLE_ADMIN, ROLE_INVESTOR"/>
+        <intercept-url pattern="/workdone" access="ROLE_ADMIN, ROLE_INVESTOR"/>
 
-        <intercept-url pattern="/index*" access="ROLE_ANONYMOUS,ROLE_Admin,ROLE_Investor"/>
+        <intercept-url pattern="/index*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_INVESTOR"/>
         <intercept-url pattern="/login*" access="ROLE_ANONYMOUS"/>
 
 

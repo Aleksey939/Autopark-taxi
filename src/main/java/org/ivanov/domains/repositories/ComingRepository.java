@@ -1,7 +1,7 @@
-package org.ivanov.domain.repositories;
+package org.ivanov.domains.repositories;
 
-import org.ivanov.domain.entity.Car;
-import org.ivanov.domain.entity.Coming;
+import org.ivanov.domains.entities.Car;
+import org.ivanov.domains.entities.Coming;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

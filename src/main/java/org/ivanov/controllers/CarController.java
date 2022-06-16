@@ -1,12 +1,12 @@
 package org.ivanov.controllers;
 
-import org.ivanov.domain.entity.Brand;
-import org.ivanov.domain.entity.Car;
-import org.ivanov.domain.entity.Person;
-import org.ivanov.domain.repositories.BrandRepository;
-import org.ivanov.domain.repositories.CarRepository;
+import org.ivanov.domains.entities.Brand;
+import org.ivanov.domains.entities.Car;
+import org.ivanov.domains.entities.Person;
+import org.ivanov.domains.repositories.BrandRepository;
+import org.ivanov.domains.repositories.CarRepository;
 
-import org.ivanov.domain.repositories.PersonRepository;
+import org.ivanov.domains.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

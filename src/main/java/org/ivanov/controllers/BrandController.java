@@ -1,7 +1,7 @@
 package org.ivanov.controllers;
 
-import org.ivanov.domain.entity.Brand;
-import org.ivanov.domain.repositories.BrandRepository;
+import org.ivanov.domains.entities.Brand;
+import org.ivanov.domains.repositories.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

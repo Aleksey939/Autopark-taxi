@@ -1,4 +1,4 @@
-package org.ivanov.domain.entity;
+package org.ivanov.domains.entities;
 
 import javax.persistence.*;
 

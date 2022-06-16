@@ -1,9 +1,9 @@
 package org.ivanov.controllers;
 
-import org.ivanov.domain.entity.Authorities;
-import org.ivanov.domain.entity.Person;
-import org.ivanov.domain.repositories.AuthoritiesRepository;
-import org.ivanov.domain.repositories.PersonRepository;
+import org.ivanov.domains.entities.Authorities;
+import org.ivanov.domains.entities.Person;
+import org.ivanov.domains.repositories.AuthoritiesRepository;
+import org.ivanov.domains.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class PersonController {
 
     @PostMapping("/add")
     public String addPerson(@ModelAttribute Person person, BindingResult result,
-                              RedirectAttributes redirectAttributes ){
+                            RedirectAttributes redirectAttributes) {
 
 
         if (result.hasErrors()) {
@@ -49,36 +49,36 @@ public class PersonController {
 
 //            String md5Hex = DigestUtils.md5Hex(person.getPassword());
 //            person.setPassword(md5Hex);
-            person.setPassword("{noop}"+person.getPassword());
+            person.setPassword("{noop}" + person.getPassword());
             personRepository.save(person);
-              Authorities authorities= new Authorities(person.getEmail(),person.getStatus(),person);
-              authoritiesRepository.save(authorities);
+            Authorities authorities = new Authorities(person.getEmail(), person.getStatus(), person);
+            authoritiesRepository.save(authorities);
 
         }
         return "redirect:/person";
     }
 
     @GetMapping("/delete/{personId}")
-    public String delete (@PathVariable Integer personId) {
+    public String delete(@PathVariable Integer personId) {
         personRepository.deleteById(personId);
-          return "redirect:/person";
+        return "redirect:/person";
     }
 
 
     @GetMapping("/edit/{personId}")
-    public String edit (Model model,@PathVariable Integer personId) {
+    public String edit(Model model, @PathVariable Integer personId) {
 
         model.addAttribute("person", personRepository.findById(personId).get());
         return "person/edit";
     }
 
     @PostMapping("/edit/{personId}")
-    public String edit (@ModelAttribute Person person, @PathVariable Integer personId) {
+    public String edit(@ModelAttribute Person person, @PathVariable Integer personId) {
 //        String md5Hex = DigestUtils.md5Hex(person.getPassword());
 //        person.setPassword(md5Hex);
-        person.setPassword("{noop}"+person.getPassword());
+        person.setPassword("{noop}" + person.getPassword());
         personRepository.save(person);
-        Authorities authorities= new Authorities(person.getEmail(),person.getStatus(),person);
+        Authorities authorities = new Authorities(person.getEmail(), person.getStatus(), person);
         authoritiesRepository.save(authorities);
         return "redirect:/person";
     }

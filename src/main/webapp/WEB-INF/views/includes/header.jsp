@@ -59,7 +59,7 @@
             </nav>
         </div>
 
-        <div class="col-md-9 col-lg-10 content-container" style="background-color: #ffe0b2">
+        <div class="col-md-9 col-lg-10 content-container" style="background-color:#d6d1c9">
             <div >
 
                 <div style="margin-top: 20px;">

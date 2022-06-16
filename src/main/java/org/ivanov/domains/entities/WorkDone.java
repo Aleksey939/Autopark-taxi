@@ -1,4 +1,4 @@
-package org.ivanov.domain.entity;
+package org.ivanov.domains.entities;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class WorkDone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String Date;
+    private String date;
     private Integer  mileage;
     private String name;
     private String description;

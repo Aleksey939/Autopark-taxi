@@ -1,10 +1,10 @@
 package org.ivanov.controllers;
 
-import org.ivanov.domain.entity.*;
-import org.ivanov.domain.repositories.CarRepository;
-import org.ivanov.domain.repositories.ComingRepository;
-import org.ivanov.domain.repositories.PaymentRepository;
-import org.ivanov.domain.repositories.PersonRepository;
+import org.ivanov.domains.entities.*;
+import org.ivanov.domains.repositories.CarRepository;
+import org.ivanov.domains.repositories.ComingRepository;
+import org.ivanov.domains.repositories.PaymentRepository;
+import org.ivanov.domains.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

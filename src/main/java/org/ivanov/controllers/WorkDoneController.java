@@ -1,9 +1,9 @@
 package org.ivanov.controllers;
 
-import org.ivanov.domain.entity.Car;
-import org.ivanov.domain.entity.WorkDone;
-import org.ivanov.domain.repositories.CarRepository;
-import org.ivanov.domain.repositories.WorkDoneRepository;
+import org.ivanov.domains.entities.Car;
+import org.ivanov.domains.entities.WorkDone;
+import org.ivanov.domains.repositories.CarRepository;
+import org.ivanov.domains.repositories.WorkDoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

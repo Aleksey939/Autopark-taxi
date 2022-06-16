@@ -1,6 +1,6 @@
-package org.ivanov.domain.repositories;
+package org.ivanov.domains.repositories;
 
-import org.ivanov.domain.entity.Authorities;
+import org.ivanov.domains.entities.Authorities;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
