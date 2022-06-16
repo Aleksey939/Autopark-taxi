@@ -1,10 +1,9 @@
 package org.ivanov.service;
 
-<<<<<<< Updated upstream
-import org.ivanov.domain.entity.WorkDone;
-=======
+
 import org.ivanov.domains.entities.WorkDone;
->>>>>>> Stashed changes
+
+
 
 import java.util.List;
 import java.util.Optional;

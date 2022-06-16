@@ -1,7 +1,7 @@
 package org.ivanov.service.impl;
 
-import org.ivanov.domain.entity.WorkDone;
-import org.ivanov.domain.repositories.WorkDoneRepository;
+import org.ivanov.domains.entities.WorkDone;
+import org.ivanov.domains.repositories.WorkDoneRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
