@@ -2,21 +2,20 @@ package org.ivanov.service.impl;
 
 import org.ivanov.domain.entity.WorkDone;
 import org.ivanov.domain.repositories.WorkDoneRepository;
-import org.ivanov.service.WorkDoneService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WorkDoneServiceImplTest {
@@ -35,7 +34,7 @@ public class WorkDoneServiceImplTest {
         );
 
         //mocks:
-        Mockito.when(workDoneRepository.findAll()).thenReturn(expectedResult);
+        when(workDoneRepository.findAll()).thenReturn(expectedResult);
 
         //when:
         final List<WorkDone> actualResult = workDoneService.findAll();
@@ -52,7 +51,7 @@ public class WorkDoneServiceImplTest {
         final List<WorkDone> expectedResult = Arrays.asList(createWorkDone(1));
 
         //mocks:
-        Mockito.when(workDoneRepository.findAllByCarId(carId)).thenReturn(expectedResult);
+        when(workDoneRepository.findAllByCarId(carId)).thenReturn(expectedResult);
 
         //when:
         final List<WorkDone> actualResult = workDoneService.findAllByCarId(carId);
@@ -74,6 +73,18 @@ public class WorkDoneServiceImplTest {
 
         //then:
         assertEquals(workDone, savedWorkDone);
+    }
+
+    @Test
+    public void deleteTest() {
+        //given:
+        final int workDoneId = 1;
+
+        //when:
+        workDoneService.deleteById(workDoneId);
+
+        //then:
+        verify(workDoneRepository, times(1)).deleteById(workDoneId);
     }
 
     private WorkDone createWorkDone(int id) {
