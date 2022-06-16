@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -55,6 +56,22 @@ public class WorkDoneServiceImplTest {
 
         //when:
         final List<WorkDone> actualResult = workDoneService.findAllByCarId(carId);
+
+        //then:
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void findByIdTest() {
+        //given:
+        int workDoneId = 1;
+        final Optional<WorkDone> expectedResult = Optional.of(createWorkDone(1));
+
+        //mocks:
+        when(workDoneRepository.findById(workDoneId)).thenReturn(expectedResult);
+
+        //when:
+        final Optional<WorkDone> actualResult = workDoneService.findById(workDoneId);
 
         //then:
         assertEquals(expectedResult, actualResult);
