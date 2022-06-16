@@ -2,8 +2,10 @@ package org.ivanov.service.impl;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.ivanov.domain.entity.WorkDone;
-import org.ivanov.domain.repositories.WorkDoneRepository;
+
+import org.ivanov.domains.entities.WorkDone;
+import org.ivanov.domains.repositories.WorkDoneRepository;
+
 import org.ivanov.service.WorkDoneService;
 import org.springframework.stereotype.Service;
 

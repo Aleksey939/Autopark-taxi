@@ -49,7 +49,7 @@
             </label>
             </br>
             <label>
-                Дата с: <input type="date" value="2019-01-01" name="date1"/> По: <input type="date" value="2019-03-06"
+                Дата с: <input type="date" value="2022-01-01" name="date1"/> По: <input type="date" value="2022-03-06"
                                                                                         name="date2"/>
 
                 </br>

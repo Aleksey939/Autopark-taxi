@@ -27,25 +27,26 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp" />
     </bean>
-
+<!--//старая не рабочая база-->
     <!--<bean id="dataSource"-->
           <!--p:username="jjxheqoyalifio"-->
           <!--p:password="211b2acec9970482b6804fa987f240d1bc07d1583a763b9841c8838a061ee5f4"-->
           <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
         <!--<property name="url" value="jdbc:postgresql://ec2-54-75-230-41.eu-west-1.compute.amazonaws.com:5432/dedhiba4ej2uif?sslmode=require" />-->
     <!--</bean>-->
-    <bean id="dataSource"
-          p:username="wjtsjnzuxiddll"
-          p:password="70e7bed4cc001fdedd2bcdfef4578a598967d77452bd4a71897a447543194791"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="url" value="jdbc:postgresql://ec2-52-18-185-208.eu-west-1.compute.amazonaws.com:5432/d859hrvn7nn9t4?sslmode=require" />
-    </bean>
+    <!--//новая база-->
     <!--<bean id="dataSource"-->
-          <!--p:username="root"-->
-          <!--p:password=""-->
+          <!--p:username="wjtsjnzuxiddll"-->
+          <!--p:password="70e7bed4cc001fdedd2bcdfef4578a598967d77452bd4a71897a447543194791"-->
           <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="url" value="jdbc:mysql://localhost:3306/autopark?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />-->
+        <!--<property name="url" value="jdbc:postgresql://ec2-52-18-185-208.eu-west-1.compute.amazonaws.com:5432/d859hrvn7nn9t4?sslmode=require" />-->
     <!--</bean>-->
+    <bean id="dataSource"
+          p:username="root"
+          p:password="springcourse"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/autopark?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+    </bean>
 
     <bean id="jpaVendorAdapter"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"

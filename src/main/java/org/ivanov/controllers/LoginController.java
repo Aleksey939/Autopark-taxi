@@ -25,8 +25,7 @@ public class LoginController {
     }
 
         @PostMapping
-        public String index(Model model
-              ) {
+        public String index(Model model) {
 //        String errorMessge = null;
 //        if(error != null) {
 //            errorMessge = "Username or Password is incorrect !!";

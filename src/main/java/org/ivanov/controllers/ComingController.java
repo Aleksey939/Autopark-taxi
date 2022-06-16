@@ -152,10 +152,10 @@ public class ComingController {
             coming.setCar(car);
 
 
-            coming.setFundMaintenance(Round2(coming.getMileage() * 0.13));
-            coming.setFundRepairs(Round2(coming.getMileage() * 0.35));
+            coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
+            coming.setFundRepairs(Round2(coming.getMileage() * 0.3));
             coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
-            coming.setDriverSalary(Round2(coming.getIncome() * 0.35));
+            coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
             coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
             coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
             var allCommingsbyCar = comingRepository.findAllByCar(car);
@@ -183,7 +183,7 @@ public class ComingController {
 
             coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
             coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-            coming.setDepreciation((coming.getCar().getPriceStart() * 28 - coming.getCar().getPriceEnd() * 28) / 104);
+            coming.setDepreciation((coming.getCar().getPriceStart() * 35 - coming.getCar().getPriceEnd() * 35) / 12*4.2);
             coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
 
 
@@ -219,10 +219,10 @@ public class ComingController {
 
         coming.setCar(car);
 
-        coming.setFundMaintenance(Round2(coming.getMileage() * 0.13));
-        coming.setFundRepairs(Round2(coming.getMileage() * 0.35));
+        coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
+        coming.setFundRepairs(Round2(coming.getMileage() * 0.3));
         coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
-        coming.setDriverSalary(Round2(coming.getIncome() * 0.35));
+        coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
         coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
         coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
         //coming.setCapitalizationMaintenanceStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationMaintenanceEnd());
@@ -243,7 +243,7 @@ public class ComingController {
 
         coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
         coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-        coming.setDepreciation((coming.getCar().getPriceStart() * 28 - coming.getCar().getPriceEnd() * 28) / 104);
+        coming.setDepreciation((coming.getCar().getPriceStart() * 35 - coming.getCar().getPriceEnd() * 35) / 12*4);
         coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
         comingRepository.save(coming);
         return "redirect:/coming";
