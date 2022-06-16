@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,11 +61,25 @@ public class WorkDoneServiceImplTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    public void saveTest() {
+        //given:
+        final WorkDone workDone = createWorkDone(1);
+
+        //mocks:
+        Mockito.when(workDoneRepository.save(workDone)).thenReturn(workDone);
+
+        //when:
+        final WorkDone savedWorkDone = workDoneService.save(workDone);
+
+        //then:
+        assertEquals(workDone, savedWorkDone);
+    }
+
     private WorkDone createWorkDone(int id) {
         WorkDone workDone = new WorkDone();
         workDone.setId(id);
 
         return workDone;
     }
-
 }
