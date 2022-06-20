@@ -4,6 +4,7 @@ import org.ivanov.domains.entities.Car;
 import org.ivanov.domains.entities.WorkDone;
 import org.ivanov.domains.repositories.CarRepository;
 import org.ivanov.domains.repositories.WorkDoneRepository;
+import org.ivanov.service.impl.WorkDoneServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ public class WorkDoneController {
     WorkDoneRepository workDoneRepository;
     @Autowired
     CarRepository carRepository;
+
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("workdones", workDonesPost);

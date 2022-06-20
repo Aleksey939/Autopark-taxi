@@ -27,33 +27,19 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp" />
     </bean>
-<!--//старая не рабочая база-->
+      <!--DB Postgress-->
     <!--<bean id="dataSource"-->
-          <!--p:username="jjxheqoyalifio"-->
-          <!--p:password="211b2acec9970482b6804fa987f240d1bc07d1583a763b9841c8838a061ee5f4"-->
-          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="url" value="jdbc:postgresql://ec2-54-75-230-41.eu-west-1.compute.amazonaws.com:5432/dedhiba4ej2uif?sslmode=require" />-->
+    <!--p:username="vsqmxmtizkigrw"-->
+    <!--p:password="c95b099e479aabaaa4935abd7b63aedac2e2ef3faed2f89fe476e57165b94e71"-->
+    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="url" value="jdbc:postgresql://ec2-52-214-23-110.eu-west-1.compute.amazonaws.com:5432/d7pijrka93ifk?sslmode=require" />-->
     <!--</bean>-->
-    <!--//новая база до удаления хероку-->
-    <!--<bean id="dataSource"-->
-          <!--p:username="wjtsjnzuxiddll"-->
-          <!--p:password="70e7bed4cc001fdedd2bcdfef4578a598967d77452bd4a71897a447543194791"-->
-          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="url" value="jdbc:postgresql://ec2-52-18-185-208.eu-west-1.compute.amazonaws.com:5432/d859hrvn7nn9t4?sslmode=require" />-->
-    <!--</bean>-->
-    <!--база данніх хероку новая-->
     <bean id="dataSource"
-    p:username="vsqmxmtizkigrw"
-    p:password="c95b099e479aabaaa4935abd7b63aedac2e2ef3faed2f89fe476e57165b94e71"
-    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="url" value="jdbc:postgresql://ec2-52-214-23-110.eu-west-1.compute.amazonaws.com:5432/d7pijrka93ifk?sslmode=require" />
+          p:username="root"
+          p:password="springcourse"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/autopark?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
     </bean>
-    <!--<bean id="dataSource"-->
-          <!--p:username="root"-->
-          <!--p:password="springcourse"-->
-          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="url" value="jdbc:mysql://localhost:3306/autopark?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />-->
-    <!--</bean>-->
 
     <bean id="jpaVendorAdapter"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"

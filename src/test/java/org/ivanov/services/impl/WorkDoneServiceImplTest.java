@@ -1,4 +1,4 @@
-package org.ivanov.service.impl;
+package org.ivanov.services.impl;
 
 import org.ivanov.domains.entities.WorkDone;
 import org.ivanov.domains.repositories.WorkDoneRepository;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class WorkDoneServiceImplTest {
     @InjectMocks
-    private WorkDoneServiceImpl workDoneService;
+    private org.ivanov.service.impl.WorkDoneServiceImpl workDoneService;
 
     @Mock
     private WorkDoneRepository workDoneRepository;
