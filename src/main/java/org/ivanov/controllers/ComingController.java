@@ -153,7 +153,7 @@ public class ComingController {
 
 
             coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
-            coming.setFundRepairs(Round2(coming.getMileage() * 0.3));
+            coming.setFundRepairs(Round2(coming.getMileage() * 0.4));
             coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
             coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
             coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
@@ -183,7 +183,7 @@ public class ComingController {
 
             coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
             coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-            coming.setDepreciation((coming.getCar().getPriceStart() * 35 - coming.getCar().getPriceEnd() * 35) / 12*4.2);
+            coming.setDepreciation((coming.getCar().getPriceStart() * 35.5 - coming.getCar().getPriceEnd() * 35.5) / 52);
             coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
 
 
@@ -220,7 +220,7 @@ public class ComingController {
         coming.setCar(car);
 
         coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
-        coming.setFundRepairs(Round2(coming.getMileage() * 0.3));
+        coming.setFundRepairs(Round2(coming.getMileage() * 0.4));
         coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
         coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
         coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
@@ -243,7 +243,7 @@ public class ComingController {
 
         coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
         coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-        coming.setDepreciation((coming.getCar().getPriceStart() * 35 - coming.getCar().getPriceEnd() * 35) / 12*4);
+        coming.setDepreciation((coming.getCar().getPriceStart() * 35.5 - coming.getCar().getPriceEnd() * 35.5) / 52);
         coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
         comingRepository.save(coming);
         return "redirect:/coming";
