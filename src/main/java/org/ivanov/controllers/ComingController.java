@@ -1,5 +1,6 @@
 package org.ivanov.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.ivanov.domains.entities.Car;
 import org.ivanov.domains.entities.Coming;
@@ -9,6 +10,7 @@ import org.ivanov.domains.repositories.CarRepository;
 import org.ivanov.domains.repositories.ComingRepository;
 import org.ivanov.domains.repositories.PaymentRepository;
 import org.ivanov.domains.repositories.PersonRepository;
+import org.ivanov.services.ComingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -25,18 +27,13 @@ import java.util.*;
 //@EnableGlobalMethodSecurity(securedEnabled = true)
 @Controller
 @RequestMapping("/coming")
+@RequiredArgsConstructor
 public class ComingController {
-
-
-    @Autowired
-    ComingRepository comingRepository;
-
-    @Autowired
-    CarRepository carRepository;
-    @Autowired
-    PersonRepository personRepository;
-    @Autowired
-    PaymentRepository paymentRepository;
+    final ComingRepository comingRepository;
+    final CarRepository carRepository;
+    final PersonRepository personRepository;
+    final PaymentRepository paymentRepository;
+    final ComingService comingService;
 
     @GetMapping
     public String index(Model model, RedirectAttributes attr) {
@@ -141,60 +138,15 @@ public class ComingController {
             }
             redirectAttributes.addFlashAttribute("coming", "Binding error");
         } else {
-
-
-            coming.setStartDate(LocalDate.parse(coming.getStartDateDto(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-
+            comingService.create(coming, carId);
             redirectAttributes.addFlashAttribute("coming", "Added successfully");
-            Car car = carRepository.findById(carId).get();
-            coming.setCar(car);
-
-
-            coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
-            coming.setFundRepairs(Round2(coming.getMileage() * 0.4));
-            coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
-            coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
-            coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
-            coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
-            var allCommingsbyCar = comingRepository.findAllByCar(car);
-
-            if (allCommingsbyCar.size() == 0) {
-                coming.setCapitalizationMaintenanceStart(0);
-                coming.setCapitalizationRepairsStart(0);
-            } else {
-                coming.setCapitalizationMaintenanceStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationMaintenanceEnd());
-                coming.setCapitalizationRepairsStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationRepairsEnd());
-            }
-            coming.setCapitalizationMaintenanceEnd(Round2(coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
-            coming.setCapitalizationRepairsEnd(Round2(coming.getCapitalizationRepairsStart() + coming.getFundRepairs() - coming.getCostsOfRepairs()));
-
-
-            coming.setProfit(Round2(coming.getIncome()
-                    + coming.getBonus()
-                    - coming.getCommissionPartner()
-                    - coming.getDriverSalary()
-                    - coming.getFuelCosts()
-                    - coming.getFundMaintenance()
-                    - coming.getFundRepairs()
-                    - coming.getCurrentExpenses()
-                    - coming.getCarWash()));
-
-            coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
-            coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-            coming.setDepreciation((coming.getCar().getPriceStart() * 35.5 - coming.getCar().getPriceEnd() * 35.5) / 52);
-            coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
-
-
-            comingRepository.save(coming);
         }
         return "redirect:/coming";
     }
+
     @Secured("ROLE_Admin")
     @GetMapping("/delete/{comingId}")
     public String delete(@PathVariable Integer comingId) {
-
         comingRepository.deleteById(comingId);
 
         return "redirect:/coming";
@@ -211,41 +163,8 @@ public class ComingController {
     @Secured("ROLE_Admin")
     @PostMapping("/edit/{comingId}")
     public String edit(Model model, @ModelAttribute Coming coming, @PathVariable Integer comingId, @RequestParam Integer carId) {
+        comingService.edit(coming, carId);
 
-        Car car = carRepository.findById(carId).get();
-        //List<Coming> allCommingsbyCar = comingRepository.findAllByCar(car);
-        coming.setStartDate(LocalDate.parse(coming.getStartDateDto(),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-        coming.setCar(car);
-
-        coming.setFundMaintenance(Round2(coming.getMileage() * 0.18));
-        coming.setFundRepairs(Round2(coming.getMileage() * 0.4));
-        coming.setCommissionPartner(Round2(coming.getIncome() * 0.07 + coming.getBonus() * 0.07));
-        coming.setDriverSalary(Round2(coming.getIncome() * 0.6));
-        coming.setConsumptionOneKm(Round2(coming.getFuelCosts() / (double) coming.getMileage()));
-        coming.setProfitOneKm(Round2(coming.getIncome() / (double) coming.getMileage()));
-        //coming.setCapitalizationMaintenanceStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationMaintenanceEnd());
-        coming.setCapitalizationMaintenanceEnd(Round2(coming.getCapitalizationMaintenanceStart() + coming.getFundMaintenance() - coming.getCostsOfMaintenance()));
-        //coming.setCapitalizationRepairsStart(allCommingsbyCar.get(allCommingsbyCar.size() - 1).getCapitalizationRepairsEnd());
-        coming.setCapitalizationRepairsEnd(Round2(coming.getCapitalizationRepairsStart() + coming.getFundRepairs() - coming.getCostsOfRepairs()));
-
-
-        coming.setProfit(Round2(coming.getIncome()
-                + coming.getBonus()
-                - coming.getCommissionPartner()
-                - coming.getDriverSalary()
-                - coming.getFuelCosts()
-                - coming.getFundMaintenance()
-                - coming.getFundRepairs()
-                - coming.getCurrentExpenses()
-                - coming.getCarWash()));
-
-        coming.setCommissionControl(Round2(coming.getProfit() * 0.25));
-        coming.setInvestorIncome(Round2(coming.getProfit() - coming.getCommissionControl()));
-        coming.setDepreciation((coming.getCar().getPriceStart() * 35.5 - coming.getCar().getPriceEnd() * 35.5) / 52);
-        coming.setNetinvestorIncome(Round2(coming.getInvestorIncome() - coming.getDepreciation()));
-        comingRepository.save(coming);
         return "redirect:/coming";
     }
 

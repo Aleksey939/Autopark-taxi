@@ -1,6 +1,8 @@
 package org.ivanov.domains.entities;
 
 import lombok.Data;
+import org.ivanov.domains.entities.listeners.ComingListener;
+import org.ivanov.services.utils.CommonUtil;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@EntityListeners(ComingListener.class)
 public class Coming {
 
     @Id
@@ -50,4 +53,25 @@ public class Coming {
     @ManyToOne(optional = false)
     private Car car;
 
+    public double calculateProfit() {
+        return CommonUtil.round2(getIncome()
+                + getBonus()
+                - getCommissionPartner()
+                - getDriverSalary()
+                - getFuelCosts()
+                - getFundMaintenance()
+                - getFundRepairs()
+                - getCurrentExpenses()
+                - getCarWash());
+    }
+
+    public double calculateCapitalizationMaintenanceEnd() {
+        return CommonUtil.round2(getCapitalizationMaintenanceStart() +
+                getFundMaintenance() - getCostsOfMaintenance());
+    }
+
+    public double calculateCapitalizationRepairsEnd() {
+        return CommonUtil.round2(getCapitalizationRepairsStart() +
+                getFundRepairs() - getCostsOfRepairs());
+    }
 }
